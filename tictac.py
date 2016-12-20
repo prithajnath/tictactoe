@@ -1,6 +1,23 @@
 checks = {(0,0):[[(0,1),(0,2)],[(1,0),(2,0)],[(1,1),(2,2)]],
     (0,1):[[(0,0),(0,2)],[(1,1),(2,1)]],
-    (0,2):[[(0,0),(0,1)],[(1,2),(2,2)],[(1,1),(2,1)]]
+    (0,2):[[(0,0),(0,1)],[(1,2),(2,2)],[(1,1),(2,1)]],
+    (1,0):[[(1,1),(1,2)],[(0,0),(2,0)]],
+    (1,1):[[(0,0),(2,2)],[(0,1),(2,1)],[(0,2),(2,0)],[(1,0),(1,2)]],
+    (1,2):[[(0,2),(2,2)],[(1,0),(1,1)]],
+    (2,0):[[(0,0),(1,0)],[(1,1),(0,2)],[(2,2),(2,1)]],
+    (2,1):[[(2,0),(2,2)],[(1,1),(0,1)]],
+    (2,2):[[(1,1),(0,0)],[(0,2),(1,2)],[(2,0),(2,1)]]
+}
+
+pos = {1:(0,0),
+    2:(0,1),
+    3:(0,2),
+    4:(1,0),
+    5:(1,1),
+    6:(1,2),
+    7:(2,0),
+    8:(2,1),
+    9:(2,2)
 }
 
 def makeMove(move,x,y):
@@ -8,15 +25,19 @@ def makeMove(move,x,y):
     
 def checkWins(board,move,tup):
     for i in checks[tup]:
-        print "This is i"
-        print i
+        #print "This is i"
+        #print i
         winner = 0
         for j in i:
-            print j
+            #print j
             if board[j[0]][j[1]] == move:
                 winner += 1
         if winner == 2:
             return True
+def printboard(board):
+    print board[0]
+    print board[1]
+    print board[2]
                     
                     
 board = [[0,0,0] for i in range(3)]
@@ -26,12 +47,12 @@ while not over:
     print("Player {}".format(player)+"'s move: ")
     s = raw_input()
     print("Player {}".format(player)+"'s position: ")
-    x,y = eval(raw_input()),eval(raw_input())
-    makeMove(s,x,y)
-    if checkWins(board,s,(x,y)):
+    x = eval(raw_input())
+    makeMove(s,pos[x][0],pos[x][1])
+    if checkWins(board,s,pos[x]):
         print "We have a winner"
         over = True
     player = (player + 1)%2
-    print board
+    printboard(board)
     
     
