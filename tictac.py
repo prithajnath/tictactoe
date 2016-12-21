@@ -70,22 +70,9 @@ while not over:
             continue
         s = (s+1)%2
         makeMove(moves[s],pos[x][0],pos[x][1])
-        
-        
-        
-    '''
-    print("Player {}".format(player)+"'s move: ")
-    x = eval(raw_input())
-    if board[pos[x][0]][pos[x][1]] != '_':
-        print("Cell already taken. Pick another one: ")
-        continue
-    s = (s+1)%2
-    makeMove(moves[s],pos[x][0],pos[x][1])
-    '''
+
     if checkWins(board,moves[s],pos[x]):
         print "Player {}".format(player)+" wins!!"
         over = True
     player = (player + 1)%2
-    printboard(board)
-    
-    
+    printboard(board)    
