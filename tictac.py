@@ -25,15 +25,13 @@ def makeMove(move,x,y):
     
 def checkWins(board,move,tup):
     for i in checks[tup]:
-        #print "This is i"
-        #print i
         winner = 0
         for j in i:
-            #print j
             if board[j[0]][j[1]] == move:
                 winner += 1
         if winner == 2:
             return True
+            
 def printboard(board):
     print board[0]
     print board[1]
@@ -42,20 +40,27 @@ def printboard(board):
                     
 board = [['_','_','_'] for i in range(3)]
 over = False
+moves = ['X','O']
 player = 0
+print("Player {}".format(player)+"'s symbol. Press 0 for X and 1 for O:")
+s = eval(raw_input())
+print("Player {}".format(player)+"'s move: ")
+x = eval(raw_input())
+makeMove(moves[s],pos[x][0],pos[x][1])
+printboard(board)
 while not over:
+    player = (player + 1)%2
     print("Player {}".format(player)+"'s move: ")
-    s = raw_input()
-    print("Player {}".format(player)+"'s position: ")
     x = eval(raw_input())
     if board[pos[x][0]][pos[x][1]] != '_':
         print("Cell already taken. Pick another one: ")
         continue
-    makeMove(s,pos[x][0],pos[x][1])
-    if checkWins(board,s,pos[x]):
+    s = (s+1)%2
+    makeMove(moves[s],pos[x][0],pos[x][1])
+    if checkWins(board,moves[s],pos[x]):
         print "Player {}".format(player)+" wins!!"
         over = True
-    player = (player + 1)%2
+    
     printboard(board)
     
     
