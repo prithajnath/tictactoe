@@ -40,7 +40,7 @@ def printboard(board):
     print board[2]
                     
                     
-board = [[0,0,0] for i in range(3)]
+board = [['_','_','_'] for i in range(3)]
 over = False
 player = 0
 while not over:
@@ -48,9 +48,12 @@ while not over:
     s = raw_input()
     print("Player {}".format(player)+"'s position: ")
     x = eval(raw_input())
+    if board[pos[x][0]][pos[x][1]] != '_':
+        print("Cell already taken. Pick another one: ")
+        continue
     makeMove(s,pos[x][0],pos[x][1])
     if checkWins(board,s,pos[x]):
-        print "We have a winner"
+        print "Player {}".format(player)+" wins!!"
         over = True
     player = (player + 1)%2
     printboard(board)
